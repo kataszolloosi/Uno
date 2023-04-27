@@ -2,13 +2,27 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private String name;
-    private int playersNumber = 4;
-    public ArrayList<Card> cards = new ArrayList<>();
+    protected String name;
+    protected int playersNumber = 4;
+    private final ArrayList<Card> cards = new ArrayList<>();
 
     public Player(String name, int playersNumber) {
         this.name = name;
         this.playersNumber = playersNumber;
+    }
+
+    public void giveCard(Card card) {
+        cards.add(card);
+    }
+    public void dropCard(Card card) {
+        cards.remove(card);
+    }
+
+    public boolean sayUno() {
+        boolean uno = false;
+        if (cards.size() ==1) {
+            uno = true;
+        } return uno;
     }
 
     public String getName() {
@@ -27,10 +41,6 @@ public class Player {
         this.playersNumber = playersNumber;
     }
 
-
-    public void giveCard(Card card) {
-        cards.add(card);
-    }
 
     @Override
     public String toString() {
