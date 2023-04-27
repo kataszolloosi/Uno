@@ -1,29 +1,26 @@
-public class Karte {
-    private final String zeichen;
-    private String farbe;
+public class Card {
+    private final String sign;
+    private String color;
 
-    public Karte(String zeichen, String farbe) {
-        this.zeichen = zeichen;
-        this.farbe = farbe;
+    public Card(String sign, String color) {
+        this.sign = sign;
+        this.color = color;
     }
 
     public String getZeichen() {
-        return zeichen;
+        return sign;
     }
 
     public String getFarbe() {
-        return farbe;
+        return color;
     }
 
-    public void setFarbe(String farbe) {
-        this.farbe = farbe;
+    public void setFarbe(String color) {
+        this.color = color;
     }
 
     @Override
     public String toString() {
-        return "Karte{" +
-                "zeichen='" + zeichen + '\'' +
-                ", farbe='" + farbe + '\'' +
-                '}';
+        return sign + ' ' + color;
     }
 }
