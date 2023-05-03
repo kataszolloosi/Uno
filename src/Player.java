@@ -1,8 +1,8 @@
-import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player {
-
+    Scanner input = new Scanner(System.in);
     protected String name;
     protected int playersNumber = 4;
     private final ArrayList<Card> cardsInHand = new ArrayList<>();
@@ -21,6 +21,17 @@ public class Player {
     //karte von hand
     public void dropCard(Card card) {
         cardsInHand.remove(card);
+    }
+
+    //karte auf dem tisch legen
+    public int playerDropCard() {
+        int choice = input.nextInt();   //kann wählen welche karte(wievielte) vom reihe(1-7)
+        for (int i = 0; i < cardsInHand.size(); i++) {
+            if (choice>0 || choice < 8){
+                cardsInHand.get(choice-1);
+                dropCard(cardsInHand.get(choice-1));
+            }
+        } return choice;
     }
 
 //    public boolean sayUno() {

@@ -11,13 +11,14 @@ public class Game {
     public void start() {
         shareCards();   //karten austeilen
         layStartCard();  //erste karte auf dem tisch
+        cardChoice();
     }
 
-    public void playerDropCard() {
-        for (Player p : playersInGame) {
-
-        }
-    }
+   public String cardChoice() {
+        String choice = "Welche karte möchten Sie ausspielen?";
+       System.out.println(choice);
+        return choice;
+   }
 
 
     public void addPlayerToPlayerList(Player p) {
