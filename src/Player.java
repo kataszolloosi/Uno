@@ -13,11 +13,11 @@ public class Player {
         this.playersNumber = playersNumber;
     }
 
-
     //karte zu hand
     public void giveCard(Card card) {
         cardsInHand.add(card);
     }
+
     //karte von hand
     public void dropCard(Card card) {
         cardsInHand.remove(card);
@@ -49,6 +49,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player"+playersNumber +": "+ name;
+        return "Player"+playersNumber +": "+ name + " karten in Hand: "+cardsInHand;
     }
 }
