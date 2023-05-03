@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -17,6 +15,9 @@ public class Main {
         gamePlayers.addPlayerToPlayerList(marlies);
         gamePlayers.start();
         System.out.println(gamePlayers);
+        gamePlayers.cardChoice();
+        System.out.println(gamePlayers);
+
 
     }
 }

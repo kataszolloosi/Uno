@@ -63,8 +63,15 @@ public class CardDeck {
         }
         Collections.shuffle(cards);
     }
-    //methode karten amzuheben
+
+    //methode karten aufheben
     public Card drawCard() {
         return cards.remove(cards.size()-1);
     }
+
+    public void addToDiscardPile(Card playerDropCard) {  //gespielte karte zum neue stapel
+        cards.add(playerDropCard);
+    }
+
+
 }
