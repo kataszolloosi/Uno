@@ -15,8 +15,7 @@ public class Main {
         gamePlayers.addPlayerToPlayerList(ksenija);
         gamePlayers.addPlayerToPlayerList(nora);
         gamePlayers.addPlayerToPlayerList(marlies);
-        System.out.println(gamePlayers);
-        gamePlayers.shareCards();
+        gamePlayers.start();
         System.out.println(gamePlayers);
 
     }

@@ -49,6 +49,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player"+playersNumber +": "+ name + " karten in Hand: "+cardsInHand;
+        return "Player"+playersNumber +": "+ name + " Karten in Hand: "+cardsInHand + "\n";
     }
 }

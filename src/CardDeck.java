@@ -6,7 +6,7 @@ public class CardDeck {
     private final ArrayList<Card> cards = new ArrayList<>();
 
     public CardDeck() {   //default konstruktor
-        createCards();
+        createCards();    //creating carddeck
     }
 
     @Override

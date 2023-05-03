@@ -8,24 +8,41 @@ public class Game {
     ArrayList<Card> cardsInGame = new ArrayList<>();
 
 
+    public void start() {
+        shareCards();   //karten austeilen
+        layStartCard();  //erste karte auf dem tisch
+    }
+
+    public void playerDropCard() {
+        for (Player p : playersInGame) {
+
+        }
+    }
+
+
     public void addPlayerToPlayerList(Player p) {
         playersInGame.add(p);
     }
 
-
     //karten austeilen - 7karte
-        public void shareCards() {
-            for (Player p : playersInGame) {
-                for (int i = 0; i < 7; i++) {
-                    p.giveCard(cardDeck.drawCard());  //eine karte von deck zu spieler
-                }
+    public void shareCards() {
+        for (Player p : playersInGame) {
+            for (int i = 0; i < 7; i++) {
+                p.giveCard(cardDeck.drawCard());  //eine karte von deck zu spieler
             }
         }
+    }
 
-        @Override
-        public String toString() {
-            return "Game{" +
-                    "players=" + playersInGame +
-                    '}';
-        }
+    //erste karte auf dem tisch
+    public Card layStartCard() {
+        Card card = new Card(null, null);
+        card = cardDeck.drawCard();
+        return card;
+    }
+
+    @Override
+    public String toString() {
+        return "Game: " +  "\n" + " First Card: " + layStartCard()+ "\n" +
+                "Players=" + playersInGame;
+    }
 }
