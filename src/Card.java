@@ -1,4 +1,6 @@
 public class Card {
+
+    //card klasse mit eigenschaften
     private final String sign;
     private String color;
 

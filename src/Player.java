@@ -1,29 +1,34 @@
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class Player {
 
     protected String name;
     protected int playersNumber = 4;
-    private final ArrayList<Card> cards = new ArrayList<>();
+    private final ArrayList<Card> cardsInHand = new ArrayList<>();
+    ArrayList<Player> players = new ArrayList<>();
 
     public Player(String name, int playersNumber) {
         this.name = name;
         this.playersNumber = playersNumber;
     }
 
+
+    //karte zu hand
     public void giveCard(Card card) {
-        cards.add(card);
+        cardsInHand.add(card);
     }
+    //karte von hand
     public void dropCard(Card card) {
-        cards.remove(card);
+        cardsInHand.remove(card);
     }
 
-    public boolean sayUno() {
-        boolean uno = false;
-        if (cards.size() ==1) {
-            uno = true;
-        } return uno;
-    }
+//    public boolean sayUno() {
+//        boolean uno = false;
+//        if (cards.size() ==1) {
+//            uno = true;
+//        } return uno;
+//    }
 
     public String getName() {
         return name;

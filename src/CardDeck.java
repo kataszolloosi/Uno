@@ -5,11 +5,16 @@ import java.util.Collections;
 public class CardDeck {
     private final ArrayList<Card> cards = new ArrayList<>();
 
+    public CardDeck() {   //default konstruktor
+        createCards();
+    }
+
     @Override
     public String toString() {
         return "CardDeck" + cards;
     }
 
+    //carddeck erstellen mit alle aktionskarten
     public void createCards() {
         for (int i = 0; i < 2; i++) {  //stückzahl
             cards.add(new Card("Reverse", "Blue"));
@@ -56,7 +61,10 @@ public class CardDeck {
             cards.add(new Card("+4", "Black"));
             cards.add(new Card("Color Change", "Black"));
         }
-
         Collections.shuffle(cards);
+    }
+    //methode karten amzuheben
+    public Card drawCard() {
+        return cards.remove(cards.size()-1);
     }
 }

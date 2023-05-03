@@ -1,26 +1,21 @@
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
-        CardDeck deck = new CardDeck();
-        deck.createCards();
-        System.out.println(deck);
 
+        //4menschliche spieler
         Player kata = new Player("Kata", 1);
         Player ksenija = new Player("Ksenija", 2);
         Player nora = new Player("Nora", 3);
         Player marlies = new Player("Marlies", 4);
 
+        //spieler zu game
+        Game gamePlayers = new Game();
+        gamePlayers.addPlayerToPlayerList(kata);
+        gamePlayers.addPlayerToPlayerList(ksenija);
+        gamePlayers.addPlayerToPlayerList(nora);
+        gamePlayers.addPlayerToPlayerList(marlies);
+        System.out.println(gamePlayers);
 
-        Game game = new Game();
-        game.addPlayerToGame(kata);
-        game.addPlayerToGame(ksenija);
-        game.addPlayerToGame(nora);
-        game.addPlayerToGame(marlies);
-
-        game.addCardsToGame()
-        game.shareCards();
-        System.out.println(game);
+        gamePlayers.shareCards();
 
 
     }

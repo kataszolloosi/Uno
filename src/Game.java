@@ -3,31 +3,30 @@ import java.util.ArrayList;
 
 public class Game {
 
-    ArrayList<Player> players = new ArrayList<>();
-    CardDeck cardDeck = new CardDeck();
+    ArrayList<Player> playersInGame = new ArrayList<>();
+    private CardDeck cardDeck = new CardDeck();
+    ArrayList<Card> cardsInGame = new ArrayList<>();
 
-    public void addPlayerToGame(Player p) {
-        players.add(p);
-        }
 
-    public void addCardsToGame(CardDeck cardDeck) {
-        this.cardDeck = cardDeck;
+    public void addPlayerToPlayerList(Player p) {
+        playersInGame.add(p);
     }
 
+
+    //karten austeilen - 7karte
         public void shareCards() {
-            for (Player p : players) {
+            for (Player p : playersInGame) {
                 for (int i = 0; i < 7; i++) {
-                    p.giveCard(cards.get(i));
-                    cards.remove(i);
+                    p.giveCard(cardDeck.drawCard());  //eine karte von deck zu spieler
                 }
             }
         }
 
+
         @Override
         public String toString() {
             return "Game{" +
-                    "players=" + players +
-                    ", cards=" + cards +
+                    "players=" + playersInGame +
                     '}';
         }
-    }
+}
