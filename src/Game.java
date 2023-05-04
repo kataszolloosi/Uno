@@ -20,7 +20,6 @@ public class Game {
 
         for (Player p : playersInGame) {
             System.out.println("Welche Karte möchten Sie ausspielen?");
-            p.playerDropCard();
             discardPile.addToDiscardPile(p.playerDropCard());
         }
    }
