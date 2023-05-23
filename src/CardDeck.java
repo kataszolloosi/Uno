@@ -70,7 +70,12 @@ public class CardDeck {
     }
 
     public void addToDiscardPile(Card playerDropCard) {  //gespielte karte zum neue stapel
+
         cards.add(playerDropCard);
+    }
+
+    public Card getDropCard() {
+        return cards.get(cards.size()-1);
     }
 
 

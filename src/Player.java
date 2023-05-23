@@ -29,7 +29,20 @@ public class Player {
             return cardsInHand.remove(choice - 1);
         }
         return null;
+
+//        int choice;   //kann wählen welche karte(wievielte) vom reihe(1-7)
+//
+//        do {
+//            choice=input.nextInt();
+//            if (choice > 0 && choice < cardsInHand.size()) {
+//                return cardsInHand.remove(choice - 1);
+//            } else {
+//                System.out.println("Bitte eine Nummer zwischen 1 und " + cardsInHand.size() + " eingeben:");
+//            }
+//        } while (true);
+
     }
+
 
 //    public boolean sayUno() {
 //        boolean uno = false;
@@ -48,13 +61,14 @@ public class Player {
 //    }
 
     public int countMyCards() {   //wie viel karte habe ich
-        return cardsInHand.size();
+
+    return cardsInHand.size();
     }
     public String showMyCards() {
         String myCards = "";
         int i = 1;
         for (Card shoMyCards : cardsInHand) {
-            myCards += i+ " -> " + shoMyCards.toString() + "\n";
+            myCards += i + " -> " + shoMyCards.toString() + "\n";
             i++;
         } return myCards;
     }
@@ -80,6 +94,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player"+playersNumber +": "+ name + " Karten in Hand: "+cardsInHand + "\n";
+
+    return "Player"+playersNumber +": "+ name + " Karten in Hand: "+cardsInHand + "\n";
     }
 }

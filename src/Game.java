@@ -20,12 +20,13 @@ public class Game {
     public void cardChoice() {
         do {
             for (Player p : playersInGame) {
-                System.out.println("Card on Table: ");
-                System.out.println(layStartCard());
+//                System.out.println("Card on Table: ");
+//                System.out.println(layStartCard());
                 System.out.println("Player " + p.getName() + " your turn");
                 System.out.println("Your cards: " + p.showMyCards());
                 System.out.println("Welche Karte möchten Sie ausspielen?");
                 discardPile.addToDiscardPile(p.playerDropCard());
+                System.out.println("Card on Table: " + discardPile.getDropCard());
             }
         } while(table !=  null);
     }
@@ -51,6 +52,25 @@ public class Game {
         card = cardDeck.drawCard();
         return card;
     }
+    //public Card spielRegel(){
+//        for(Player player:playersInGame){
+//     if (discardPile.getDropCard().getSign().equals("+2") || discardPile.getDropCard().getSign().equals("+4")) {
+//        System.out.println("Du musst " + discardPile.getDropCard().getSign() + " Karten nehmen!");
+//        if (discardPile.getDropCard().getSign().equals("+2")) {
+//            player.giveCard(cardDeck.());
+//            System.out.println("Dir wurde eine neue Karte gegeben: " + karten.get(0));
+//            cardDeck.remove(0);
+//            player.giveCard(cardDeck.get());
+//            System.out.println("Dir wurde eine neue Karte gegeben: " + karten.get(0));
+//            karten.remove(0);
+//        } else {
+//            for (int i = 0; i < 4; i++) {
+//                spielKartenLegen.giveCard(karten.get(0));
+//                System.out.println("Dir wurde eine neue Karte gegeben: " + karten.get(0));
+//                karten.remove(0);
+//            }
+//        }
+//    }}}
 
     @Override
     public String toString() {
