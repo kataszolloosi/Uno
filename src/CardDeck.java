@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class CardDeck {
@@ -64,17 +63,19 @@ public class CardDeck {
         Collections.shuffle(cards);
     }
 
-    //methode karten aufheben
+
     public Card drawCard() {
+        //methode karten aufheben
         return cards.remove(cards.size()-1);
     }
 
-    public void addToDiscardPile(Card playerDropCard) {  //gespielte karte zum neue stapel
-
+    public void addToCards(Card playerDropCard) {
+        //gespielte karte zum neue stapel
         cards.add(playerDropCard);
     }
 
     public Card getDropCard() {
+        //eine karte ausspielen
         return cards.get(cards.size()-1);
     }
 

@@ -1,28 +1,28 @@
 public class Card {
 
     //card klasse mit eigenschaften
-    private final String sign;
-    private String color;
+    private final String sign;   // Kartenfarben als String angegeben
+    private String color;       //Kartenzeichen als finale String angegeben/kann nicht geändert werden
 
     public Card(String sign, String color) {
         this.sign = sign;
         this.color = color;
     }
 
-    public String getZeichen() {
+    public String getSign() {
         return sign;
     }
 
-    public String getFarbe() {
+    public String getColor() {
         return color;
     }
 
-    public void setFarbe(String color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
     @Override
     public String toString() {
-        return sign + ' ' + color;
+        return color + ' ' + sign;
     }
 }
