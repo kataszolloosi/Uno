@@ -15,57 +15,63 @@ public class CardDeck {
 
     //carddeck erstellen mit alle aktionskarten
     public void createCards() {
+        //blaue karte erstellen
         for (int i = 0; i < 2; i++) {  //stückzahl
-            cards.add(new Card("Reverse", "Blue"));
-            cards.add(new Card("+2", "Blue"));
-            cards.add(new Card("Stop", "Blue"));
+            cards.add(new Card("Reverse", "Blue", 20));
+            cards.add(new Card("+2", "Blue", 20));
+            cards.add(new Card("Stop", "Blue", 20));
             for (int j = 1; j < 10; j++) {  //zahlen
-                cards.add(new Card(Integer.toString(j), "Blue"));
+                cards.add(new Card(Integer.toString(j), "Blue", i));
             }
         }
 
         for (int i = 0; i < 2; i++) {
-            cards.add(new Card("Reverse", "Green"));
-            cards.add(new Card("+2", "Green"));
-            cards.add(new Card("Stop", "Green"));
+            //grüne karte erstellen
+            cards.add(new Card("Reverse", "Green", 20));
+            cards.add(new Card("+2", "Green", 20));
+            cards.add(new Card("Stop", "Green", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Green"));
+                cards.add(new Card(Integer.toString(j), "Green", i));
             }
         }
         for (int i = 0; i < 2; i++) {
-            cards.add(new Card("Reverse", "Red"));
-            cards.add(new Card("+2", "Red"));
-            cards.add(new Card("Stop", "Red"));
+            //rote karte erstellen
+            cards.add(new Card("Reverse", "Red", 20));
+            cards.add(new Card("+2", "Red", 20));
+            cards.add(new Card("Stop", "Red", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Red"));
+                cards.add(new Card(Integer.toString(j), "Red", i));
             }
         }
 
         for (int i = 0; i < 2; i++) {
-            cards.add(new Card("Reverse", "Yellow"));
-            cards.add(new Card("+2", "Yellow"));
-            cards.add(new Card("Stop", "Yellow"));
+            //gelbe karte erstellen
+            cards.add(new Card("Reverse", "Yellow", 20));
+            cards.add(new Card("+2", "Yellow", 20));
+            cards.add(new Card("Stop", "Yellow", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Yellow"));
+                cards.add(new Card(Integer.toString(j), "Yellow" , i));
             }
         }
         for (int b = 0; b < 1; b++) {
-            cards.add(new Card("0", "Blue"));
-            cards.add(new Card("0", "Green"));
-            cards.add(new Card("0", "Red"));
-            cards.add(new Card("0", "Yellow"));
+            //null karte erstellen
+            cards.add(new Card("0", "Blue", 0));
+            cards.add(new Card("0", "Green", 0));
+            cards.add(new Card("0", "Red", 0));
+            cards.add(new Card("0", "Yellow", 0));
         }
 
         for (int b = 0; b < 4; b++) {
-            cards.add(new Card("+4", "Black"));
-            cards.add(new Card("Color Change", "Black"));
+            //color change karten erstellen
+            cards.add(new Card("+4", "Black", 50));
+            cards.add(new Card("ColorChange", "Black", 50));
         }
         Collections.shuffle(cards);
     }
 
 
     public Card drawCard() {
-        //methode karten aufheben
+        //karten aufheben
         return cards.remove(cards.size()-1);
     }
 

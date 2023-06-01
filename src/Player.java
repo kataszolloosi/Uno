@@ -19,14 +19,14 @@ public class Player {
         this.game = game;
     }
 
-    //karte zu hand - heben
     public void giveCard(Card card) {
+        //karte zu hand - heben
         cardsInHand.add(card);
     }
 
-
-    //karte auf dem tisch legen
     public Card playerDropCard() {
+        //karte auf dem tisch legen
+
         int choice;   //kann wählen welche karte(wievielte) vom reihe(1-7)
 
         do {
@@ -49,30 +49,13 @@ public class Player {
         while (true);
     }
 
-
-//    public boolean sayUno() {
-//        boolean uno = false;
-//        if (cards.size() ==1) {
-//            uno = true;
-//        } return uno;
-//    }
-
-//    public String winner() {
-//        for (Player p : players) {
-//            if (p.cardsInHand.size() == 0) {
-//                winner = p.getName();
-//                gameOver = true;
-//            }
-//        } return winner;
-//    }
-
-    //wie viel karte habe ich
     public int countMyCards() {
-
+        //wie viel karte habe ich
         return cardsInHand.size();
     }
 
     public String showMyCards() {
+        //welche karten hat der spieler
         String myCards = "";
         int i = 1;
         for (Card shoMyCards : cardsInHand) {
@@ -97,7 +80,6 @@ public class Player {
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
     }
-
 
     @Override
     public String toString() {

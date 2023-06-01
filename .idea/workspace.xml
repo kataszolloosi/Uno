@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f97a6acd-e99a-4072-90b3-f8c0b61e3e7b" name="Changes" comment="0405">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f97a6acd-e99a-4072-90b3-f8c0b61e3e7b" name="Changes" comment="2505">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardDeck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +86,7 @@
       <workItem from="1683098359617" duration="262000" />
       <workItem from="1683098739974" duration="12576000" />
       <workItem from="1683183107043" duration="6123000" />
+      <workItem from="1685604226412" duration="11573000" />
     </task>
     <task id="LOCAL-00001" summary="12">
       <created>1682596440082</created>
@@ -145,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683183257759</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="2505">
+      <created>1685008433288</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1685008433288</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +173,8 @@
     <MESSAGE value="12ghf" />
     <MESSAGE value="0305" />
     <MESSAGE value="0405" />
-    <option name="LAST_COMMIT_MESSAGE" value="0405" />
+    <MESSAGE value="2505" />
+    <option name="LAST_COMMIT_MESSAGE" value="2505" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
