@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class Game {
 
-    private ArrayList<Player> playersInGame = new ArrayList<>();    //players in game list
-    private CardDeck cardDeck = new CardDeck();   //original carddeck
-    private CardDeck discardPile = new CardDeck();  //ablegestapel
+    private ArrayList<Player> playersInGame;    //players in game list
+    private CardDeck drawPile;   //ziehstapel
+    private CardDeck discardPile;  //ablegestapel
     private Table table = new Table();
     private boolean clockweis;      //spielrichtung
     private int currentPlayerNumber = (int) (Math.random() * (4 - 1)) + 1; // random number (1-4);
@@ -15,6 +15,23 @@ public class Game {
         return discardPile;
     }
 
+    public CardDeck getDrawPile() {
+        return drawPile;
+    }
+
+    public void setDrawPile(CardDeck drawPile) {
+        this.drawPile = drawPile;
+    }
+
+    public void setDiscardPile(CardDeck discardPile) {
+        this.discardPile = discardPile;
+    }
+
+    public Game() {
+        playersInGame = new ArrayList<>();
+        drawPile = new CardDeck();
+        discardPile = new CardDeck();
+    }
 
     public void start() {
         System.out.println("----UNO----Kata-Nora-Marlies-Ksenija----\n");
@@ -45,7 +62,7 @@ public class Game {
         //karten austeilen - 7karte
         for (Player p : playersInGame) {
             for (int i = 0; i < 7; i++) {
-                p.giveCard(cardDeck.drawCard());  //eine karte von deck zu spieler
+                p.giveCard(drawPile.drawCard());  //eine karte von deck zu spieler
             }
         }
     }
@@ -54,7 +71,7 @@ public class Game {
         //erste karte auf dem tisch
         //wenn erste karte ist farbwahlkarte - random farbe wird ausgewählt
         Card card = new Card(null, null, 0);
-        card = cardDeck.drawCard();
+        card = drawPile.drawCard();
         discardPile.addToCards(card);
     }
 
@@ -64,8 +81,8 @@ public class Game {
         for (Player p : playersInGame) {
             if (card.getSign().equals("+2")) {
                 System.out.println(p.getName() + " You must pick up 2 card");
-                p.giveCard(cardDeck.drawCard());
-                p.giveCard(cardDeck.drawCard());
+                p.giveCard(drawPile.drawCard());
+                p.giveCard(drawPile.drawCard());
             }
 //            if (card.getSign().equals("Reverse")) {
 //                System.out.println(p.getName()+" You are out, direction changed");
@@ -77,10 +94,10 @@ public class Game {
             }
             if (card.getSign().equals(+4)) {
                 System.out.println(p.getName() + " You must pick up 4 card");
-                p.giveCard((cardDeck.drawCard()));
-                p.giveCard((cardDeck.drawCard()));
-                p.giveCard((cardDeck.drawCard()));
-                p.giveCard((cardDeck.drawCard()));
+                p.giveCard((drawPile.drawCard()));
+                p.giveCard((drawPile.drawCard()));
+                p.giveCard((drawPile.drawCard()));
+                p.giveCard((drawPile.drawCard()));
             }
             if (card.getSign().equals("ColorChange")) {
                 System.out.println("Which color do you choose?");

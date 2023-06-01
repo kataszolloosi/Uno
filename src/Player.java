@@ -22,6 +22,7 @@ public class Player {
     public void giveCard(Card card) {
         //karte zu hand - heben
         cardsInHand.add(card);
+        //wir müssen diese karte von drawpile entfernen
     }
 
     public Card playerDropCard() {
