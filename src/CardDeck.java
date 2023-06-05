@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardDeck {
-    private final ArrayList<Card> cards = new ArrayList<>();
+    private final ArrayList<Card> cards;
 
     public CardDeck() {   //default konstruktor
+        cards = new ArrayList<>();
         createCards();    //creating carddeck
     }
 
@@ -75,7 +76,7 @@ public class CardDeck {
         return cards.remove(cards.size()-1);
     }
 
-    public void addToCards(Card playerDropCard) {
+    public void addToDiscardPile(Card playerDropCard) {
         //gespielte karte zum neue stapel
         cards.add(playerDropCard);
     }

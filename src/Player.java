@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
     protected String name;
     protected int playersNumber = 4;
     private final ArrayList<Card> cardsInHand = new ArrayList<>();
@@ -18,11 +18,13 @@ public class Player {
         gameOver = false;
         this.game = game;
     }
+    public ArrayList<Card> getCardsInHand() {
+        return cardsInHand;
+    }
 
     public void giveCard(Card card) {
         //karte zu hand - heben
         cardsInHand.add(card);
-        //wir müssen diese karte von drawpile entfernen
     }
 
     public Card playerDropCard() {
@@ -36,7 +38,7 @@ public class Player {
                 choice = Integer.parseInt(a);
 
             } catch (NumberFormatException nfe) {
-                System.out.println("Fehler!...  Bitte eine NUMMER zwischen 1 und " + cardsInHand.size() + " eingeben:");
+                System.out.println("Error!...  Please enter a NUMBER between 1 and " + cardsInHand.size());
                 continue;
             }
             if (choice > 0 && choice <= cardsInHand.size()) {
@@ -44,14 +46,18 @@ public class Player {
                     return cardsInHand.remove(choice - 1);
                 }
             } else {
-                System.out.println("Fehler... Bitte eine Nummer zwischen 1 und " + cardsInHand.size() + " eingeben:");
+                System.out.println("Error... Please enter a NUMBER between 1 and " + cardsInHand.size() + " eingeben:");
             }
         }
         while (true);
     }
 
+    public void takeCardBack(Card card) {
+        cardsInHand.add(card);
+    }
+
     public int countMyCards() {
-        //wie viel karte habe ich
+        //wie viel karte hat ein spieler
         return cardsInHand.size();
     }
 

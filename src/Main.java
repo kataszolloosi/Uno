@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Game gamePlayers = new Game();
 
         //4menschliche spieler
@@ -14,10 +18,9 @@ public class Main {
         gamePlayers.addPlayerToPlayerList(nora);
         gamePlayers.addPlayerToPlayerList(marlies);
         gamePlayers.start();
-        //System.out.println(gamePlayers);
-        System.out.println("First Card: " + gamePlayers.getDiscardPile().getDropCard());
-        gamePlayers.cardChoice();
         System.out.println(gamePlayers);
+        gamePlayers.cardChoice();
+
 
 
     }
