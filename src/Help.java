@@ -15,13 +15,13 @@ public class Help {
             }
         } catch (IOException e) {
             System.out.println("Error...");
-//        } finally {
-//            try {
-//                assert bufferedReader != null;
-//                bufferedReader.close();
-//            } catch(IOException e) {
-//                e.printStackTrace();
-//            }
+        } finally {
+            try {
+                assert bufferedReader != null;
+                bufferedReader.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -41,20 +41,17 @@ public class Game {
     }
 
     public Game() {
+        //konstruktor
         playersInGame = new ArrayList<>();
         drawPile = new CardDeck();
         discardPile = new CardDeck();
-        currentPlayerNumber = (int) (Math.random() * (4 - 1)) + 1;  //random number 1-4
     }
 
-    public Player currentPlayer() {
-        Player currentPlayer = playersInGame.get(getCurrentPlayerNumber());
-        return currentPlayer;
-    }
+
 
     public void start() {
-        //initialize();
-        System.out.println("\n----UNO----Kata-Nora-Marlies-Ksenija----\n");
+        help.printHelp();  //help am anfang anzeigen
+
         shareCards();   //karten austeilen
         layStartCard();  //erste karte auf dem tisch
         chooseInitialPlayer();
@@ -62,6 +59,7 @@ public class Game {
     }
 
     public Player chooseInitialPlayer() {
+        //wählt die erste spieler random
         Random initialPlayer = new Random();
         int randomIndex = initialPlayer.nextInt(3);
 
@@ -70,38 +68,25 @@ public class Game {
         Player first = playersInGame.get(randomIndex);
         return first;
     }
-
-//    private void initialize() {
-//        exit = false;
-//        if (round > 1) {
-//            //neue Runde
-//        } else { //beim ersten spiel
-//            help.printHelp();
-//
-//            //createPlayer();
-//            //drawpile erstellen
-//            //currentPlayer initialize
-//            currentPlayer = playersInGame.get(currentPlayerNumber - 1);
-//            output.println("Startplayer: " + currentPlayer);
-//
-//        }
-//
-//    }
+    public Player currentPlayer() {
+        Player currentPlayer = playersInGame.get(getCurrentPlayerNumber());
+        return currentPlayer;
+    }
 
     public void cardChoice() {
         do {
             Player currentPlayer = currentPlayer();
-            System.out.println("\nPlayer " + currentPlayer.getName() + " your turn");
+            output.println("\nPlayer " + currentPlayer.getName() + " your turn");
             penalty();
             if (canPlayerDropACard()) {
-                System.out.println("Your cards: " + "\n" + currentPlayer.showMyCards());
-                System.out.println("Which card do you want to play?");
+                output.println("Your cards: " + "\n" + currentPlayer.showMyCards());
+                output.println("Which card do you want to play?");
                 discardPile.addToDiscardPile(currentPlayer.playerDropCard());
-                System.out.println("Card on Table: " + discardPile.getDropCard());
+                output.println("Card on Table: " + discardPile.getDropCard());
                 colorChange();
             } else {
-                System.out.println("Yout still don't have a card to play");
-                System.out.println("\nCard on Table: "+discardPile.getDropCard() +"\n");
+                output.println("Yout still don't have a card to play");
+                output.println("\nCard on Table: "+discardPile.getDropCard() +"\n");
             }
             checkNextTurn();
         } while (table != null);
@@ -121,32 +106,46 @@ public class Game {
         }
     }
 
-    public void layStartCard() {
+    public Card layStartCard() {
         //erste karte auf dem tisch
         Card card = new Card(null, null, 0);
         card = drawPile.drawCard();
         discardPile.addToDiscardPile(card);
+
+//        if (card.getSign().equals("ColorChange") || card.getSign().equals("+4")) {
+//            //wenn erste karte eine farbwahlkarte ist --> farbe zufällig gewählt wird
+//            Random random = new Random();
+//            String [] colors = {"Red", "Grenn", "Yellow", "Blue"};
+//            int randomIndex = random.nextInt(colors.length);
+//            String startColor = colors[randomIndex];
+//            getDiscardPile().getDropCard().setColor(startColor);
+//            output.println("Frist card is: " + card);
+//            output.println("First color is: " + startColor);
+//        }
+        output.println("First card is: "+ card);
+        return card;
     }
 
     public boolean cardValidation(Card card) {
-        //Falls die Karte auf dem Tisch die gleiche Farbe oder Zeichen haben wird die Karte gelegt
+        //prüft, ob ein karte ist valid oder nicht
         Card discardDeckCard = getDiscardPile().getDropCard();
         Player currentPlayer = currentPlayer();
 
-        System.out.println("CardValidation: I got card " + card);
-        System.out.println("Discardpile dropcard: " + discardDeckCard);
-        System.out.println("Color: '" + card.getColor() + "'");
+
+
         if (card.getColor().equals("Black")) {
             return true;
         } else if (discardDeckCard.getColor().equals(card.getColor()) || card.getColor().equals("Black") || discardDeckCard.getColor().equals("Black")) {
+            //discardDeckCard.setColor(card.getColor());    // Neue Farbe auf das discardDeckCard-Objekt setzen
             return true;
         } else if (discardDeckCard.getSign().equals(card.getSign()) || card.getSign().equals("+4") || discardDeckCard.getSign().equals("+4")) {
             return true;
         } else if (discardDeckCard.getSign().equals(card.getSign()) || card.getSign().equals("ColorChange") || discardDeckCard.getSign().equals("ColorChange")) {
+            //discardDeckCard.setColor(card.getColor());   // Neue Farbe auf das discardDeckCard-Objekt setzen
             return true;
         } else {
-            System.out.println("Error... Choose another card!");
-            System.out.println("Card on Table: " + discardDeckCard);
+            output.println("Error... Choose another card!");
+            output.println("Card on Table: " + discardDeckCard);
         }
         if (discardDeckCard.getSign().equals("+2") || discardDeckCard.getSign().equals("+4")) {
             if (discardDeckCard.getSign().equals("+2")) {
@@ -169,16 +168,17 @@ public class Game {
     }
 
     public void penalty() {
+        //prüft, wie viel karte muss ein spieler heben
         Player currentPlayer = currentPlayer();
         Card discardDeckCard = getDiscardPile().getDropCard();
 
         if (discardDeckCard.getSign().equals("+2")) {
-            System.out.println("But first you have to take 2 cards!");
+            output.println("But first you have to take 2 cards!");
             drawPenaltyCard();
             drawPenaltyCard();
             currentPlayer.showMyCards();
         } else if (discardDeckCard.getSign().equals("+4")) {
-            System.out.println("But first you have to take 4 cards!");
+            output.println("But first you have to take 4 cards!");
             drawPenaltyCard();
             drawPenaltyCard();
             drawPenaltyCard();
@@ -188,6 +188,7 @@ public class Game {
         }
     }
     public void checkNextTurn() {
+        //prüft, wer ist die nächste beim reverse, stop und beim normale karte
         Card discardDeckCard = getDiscardPile().getDropCard();
         if (discardDeckCard.getSign().equals("Reverse")) {
             isCardIsReverse();
@@ -199,6 +200,7 @@ public class Game {
     }
 
     public int isCardNormal() {
+        //prüft, ob die karte ist eine normale karte
         int currentPlayerIndex = getCurrentPlayerNumber();
 
         if (currentPlayerIndex == 0) {
@@ -224,7 +226,8 @@ public class Game {
         return currentPlayerIndex;
     }
 
-    public int isCardIsReverse() { //This method is to decide who has the next turn when the card "Reverse" is played
+    public int isCardIsReverse() {
+        //beim reverse karte prüft wer ist die nächste spieler
         int currentPlayerIndex = getCurrentPlayerNumber();
 
         if (currentPlayerIndex == 0) {
@@ -256,6 +259,7 @@ public class Game {
         return currentPlayerIndex;
     }
     public int isCardStop() {
+        //spielrichtung
         int currentPlayerIndex = getCurrentPlayerNumber();
 
         if (currentPlayerIndex == 0) {
@@ -288,21 +292,23 @@ public class Game {
     }
 
     public void drawPenaltyCard() {
+        //wenn ein spieler bekommt ein +2 oder +4 karte, er muss abheben
         Player currentPlayer = currentPlayer();
         currentPlayer.giveCard(drawPile.drawCard());
     }
 
     public void colorChange() {
+        //spieler kann farbe wählen
         Card discardDeckCard = getDiscardPile().getDropCard();
         if (discardDeckCard.getSign().equals("ColorChange")) {
-            System.out.println("Give me a new color: ");
-            String newColor = input.nextLine();
+            output.println("Give me a new color: ");
+            String newColor = input.nextLine().toLowerCase();
             setNewColor(newColor);
         }
-
     }
 
     public boolean canPlayerDropACard() {
+        //automatisch prüft, kann der spieler eine karte legen, oder muss aufheben
         Card discardDeckCard = getDiscardPile().getDropCard();
         Player currentPlayer = currentPlayer();
         ArrayList<Card> hand = currentPlayer.getCardsInHand();
@@ -317,8 +323,8 @@ public class Game {
         }
 
         if (!hasCard) {
-            System.out.println("Sorry, you dont have a card to play. You have to draw a card!");
-            drawPenaltyCard();
+            output.println("Sorry, you dont have a card to play. You have to draw a card!");
+            drawPenaltyCard();      //wenn der spieler hat keine richtige karte zum legen, zieht automatisch eine karte
             for (Card card : hand) {
                 if (discardDeckCard.getColor().equals(card.getColor()) || discardDeckCard.getSign().equals(card.getSign())
                         || card.getColor().equals("Black") || card.getColor().equals(getNewColor())) {
@@ -326,14 +332,13 @@ public class Game {
                     break;
                 }
             }
-            System.out.println(currentPlayer.showMyCards());
+            output.println(currentPlayer.showMyCards());
         }
         return hasCard;
     }
 
     @Override
     public String toString() {
-        return "Game: " + "\n" + " First Card: " + getDiscardPile().getDropCard() + "\t\n" +
-                "\nPlayers=" + playersInGame;
+        return "Players=" + playersInGame;
     }
 }
