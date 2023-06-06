@@ -1,4 +1,3 @@
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +13,8 @@ public class Game {
     private Help help = new Help();
     private boolean clockweis = true;      //spielrichtung
     private int currentPlayerNumber;
+    private String winner;
+    private boolean gameOver;
 //    private int round = 1;
 //    private int session = 1;
 //    private boolean exit = false;
@@ -89,7 +90,7 @@ public class Game {
                 output.println("\nCard on Table: "+discardPile.getDropCard() +"\n");
             }
             checkNextTurn();
-        } while (table != null);
+        } while (gameOver != true);
     }
 
     public void addPlayerToPlayerList(Player p) {
@@ -107,22 +108,22 @@ public class Game {
     }
 
     public Card layStartCard() {
-        //erste karte auf dem tisch
-        Card card = new Card(null, null, 0);
-        card = drawPile.drawCard();
+        Card card = drawPile.drawCard();
         discardPile.addToDiscardPile(card);
 
-//        if (card.getSign().equals("ColorChange") || card.getSign().equals("+4")) {
-//            //wenn erste karte eine farbwahlkarte ist --> farbe zufällig gewählt wird
-//            Random random = new Random();
-//            String [] colors = {"Red", "Grenn", "Yellow", "Blue"};
-//            int randomIndex = random.nextInt(colors.length);
-//            String startColor = colors[randomIndex];
-//            getDiscardPile().getDropCard().setColor(startColor);
-//            output.println("Frist card is: " + card);
-//            output.println("First color is: " + startColor);
-//        }
-        output.println("First card is: "+ card);
+        if (card.getSign().equals("ColorChange") || card.getSign().equals("+4")) {
+            // Wenn die erste Karte eine Farbwahlkarte ist, wird die Farbe zufällig ausgewählt
+            Random random = new Random();
+            String[] colors = {"Red", "Green", "Yellow", "Blue"};
+            int randomIndex = random.nextInt(colors.length);
+            String startColor = colors[randomIndex];
+            newColor = startColor;
+            output.println("First card is: " + card);
+            output.println("First color is: " + startColor);
+        } else {
+            output.println("First card is: " + card);
+        }
+
         return card;
     }
 
@@ -131,17 +132,15 @@ public class Game {
         Card discardDeckCard = getDiscardPile().getDropCard();
         Player currentPlayer = currentPlayer();
 
-
-
         if (card.getColor().equals("Black")) {
             return true;
-        } else if (discardDeckCard.getColor().equals(card.getColor()) || card.getColor().equals("Black") || discardDeckCard.getColor().equals("Black")) {
-            //discardDeckCard.setColor(card.getColor());    // Neue Farbe auf das discardDeckCard-Objekt setzen
+        } else if (discardDeckCard.getColor().equals(card.getColor()) || currentPlayer.getCardsInHand().contains("Black") || discardDeckCard.getColor().equals("Black")) {
+            discardDeckCard.setColor(card.getColor());    // Neue Farbe auf das discardDeckCard-Objekt setzen
             return true;
-        } else if (discardDeckCard.getSign().equals(card.getSign()) || card.getSign().equals("+4") || discardDeckCard.getSign().equals("+4")) {
+        } else if (discardDeckCard.getSign().equals(card.getSign()) || currentPlayer.getCardsInHand().contains("+4") || discardDeckCard.getSign().equals("+4")) {
             return true;
-        } else if (discardDeckCard.getSign().equals(card.getSign()) || card.getSign().equals("ColorChange") || discardDeckCard.getSign().equals("ColorChange")) {
-            //discardDeckCard.setColor(card.getColor());   // Neue Farbe auf das discardDeckCard-Objekt setzen
+        } else if (discardDeckCard.getSign().equals(card.getSign()) || currentPlayer.getCardsInHand().contains("ColorChange") || discardDeckCard.getSign().equals("ColorChange")) {
+            discardDeckCard.setColor(card.getColor());   // Neue Farbe auf das discardDeckCard-Objekt setzen
             return true;
         } else {
             output.println("Error... Choose another card!");
@@ -176,14 +175,12 @@ public class Game {
             output.println("But first you have to take 2 cards!");
             drawPenaltyCard();
             drawPenaltyCard();
-            currentPlayer.showMyCards();
         } else if (discardDeckCard.getSign().equals("+4")) {
             output.println("But first you have to take 4 cards!");
             drawPenaltyCard();
             drawPenaltyCard();
             drawPenaltyCard();
             drawPenaltyCard();
-            currentPlayer.showMyCards();
         } else {
         }
     }
@@ -335,6 +332,15 @@ public class Game {
             output.println(currentPlayer.showMyCards());
         }
         return hasCard;
+    }
+
+    public boolean winner() {
+        for (Player p : playersInGame) {
+            if (p.getCardsInHand().size() == 0) {
+                winner = p.getName();
+                gameOver = true;
+            }
+        } return false;
     }
 
     @Override

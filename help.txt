@@ -36,4 +36,4 @@ Kartenwerte:
 
 Wenn ein Spieler 500 Punkte erreicht hat, ist das Spiel zu Ende.
 
----------------ENDE----------------
+---------------HILFE---------------
