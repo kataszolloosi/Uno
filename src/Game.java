@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    private Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
     private static PrintStream output = new PrintStream(System.out);
     private static ArrayList<Player> playersInGame;    //players in game list
     private CardDeck drawPile;   //ziehstapel
@@ -24,9 +24,9 @@ public class Game {
         return newColor;
     }
 
-    public Card setNewColor(String newColor) {
-        this.newColor = newColor;
-        return null;
+    public static String setNewColor(String newColor) {
+       newColor = newColor;
+        return newColor;
     }
 
     public static CardDeck getDiscardPile() {
@@ -158,12 +158,12 @@ public class Game {
         if (card.getColor().equals("Black")) {
             return true;
         } else if (discardDeckCard.getColor().equals(card.getColor()) || card.getColor().equals("Black") || discardDeckCard.getColor().equals("Black")) {
-
             return true;
         } else if (discardDeckCard.getSign().equals(card.getSign()) || card.getSign().equals("+4") || discardDeckCard.getSign().equals("+4")) {
+            setColorIfColorChangeCard();
             return true;
         } else if (discardDeckCard.getSign().equals(card.getSign()) || card.getSign().equals("ColorChange") || discardDeckCard.getSign().equals("ColorChange")) {
-
+            setColorIfColorChangeCard();
             return true;
         } else {
             output.println("Error... Choose another card!");
@@ -356,7 +356,7 @@ public class Game {
         return hasCard;
     }
 
-    public Card setColorIfColorChangeCard() {
+    public static String setColorIfColorChangeCard() {
         String colorWish = input.nextLine();
         System.out.println("Choose a color: Red, Blue, Green, Yellow");
 
@@ -376,7 +376,7 @@ public class Game {
             output.println("This color is not valid!");
             setColorIfColorChangeCard();
         }
-        return null;
+        return colorWish;
     }
 
     public boolean winner() {

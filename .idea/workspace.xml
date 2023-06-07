@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f97a6acd-e99a-4072-90b3-f8c0b61e3e7b" name="Changes" comment="0606">
-      <change afterPath="$PROJECT_DIR$/src/Bot.java" afterDir="false" />
+    <list default="true" id="f97a6acd-e99a-4072-90b3-f8c0b61e3e7b" name="Changes" comment="0706">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardDeck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Table.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +86,7 @@
       <workItem from="1683183107043" duration="6123000" />
       <workItem from="1685604226412" duration="11573000" />
       <workItem from="1686036169970" duration="13716000" />
-      <workItem from="1686128088884" duration="10333000" />
+      <workItem from="1686128088884" duration="11782000" />
     </task>
     <task id="LOCAL-00001" summary="12">
       <created>1682596440082</created>
@@ -163,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686048569977</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="0706">
+      <created>1686143321478</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686143321478</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +190,8 @@
     <MESSAGE value="0405" />
     <MESSAGE value="2505" />
     <MESSAGE value="0606" />
-    <option name="LAST_COMMIT_MESSAGE" value="0606" />
+    <MESSAGE value="0706" />
+    <option name="LAST_COMMIT_MESSAGE" value="0706" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
