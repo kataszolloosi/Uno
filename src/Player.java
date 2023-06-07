@@ -10,14 +10,14 @@ public class Player {
     private ArrayList<Player> players = new ArrayList<>();
     private String winner;
     private boolean gameOver;
-    private Game game;
 
-    public Player(String name, int playersNumber, Game game) {
+
+    public Player(String name, int playersNumber) {
         this.name = name;
         this.playersNumber = playersNumber;
         gameOver = false;
-        this.game = game;
     }
+
     public ArrayList<Card> getCardsInHand() {
         return cardsInHand;
     }
@@ -42,7 +42,7 @@ public class Player {
                 continue;
             }
             if (choice > 0 && choice <= cardsInHand.size()) {
-                if (game.cardValidation(cardsInHand.get(choice - 1))) {
+                if (Game.cardValidation(cardsInHand.get(choice - 1))) {
                     return cardsInHand.remove(choice - 1);
                 }
             } else {
