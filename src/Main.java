@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Game gamePlayers = new Game();
+        Game game = new Game();
 
 
-        gamePlayers.start();
+        game.start();
 
 
 
