@@ -5,16 +5,20 @@ public class Bot extends Player {
         super(name, playersNumber);
     }
 
+
+    @Override
+    public void addCardToHand(Card card) {
+        super.addCardToHand(card);
+    }
+
     @Override
     public Card playerDropCard() {
         Random random = new Random();
         int choice = random.nextInt(getCardsInHand().size());
-        Card selectedCard = CardDeck.drawCard();
-
-        if (choice > 0 && choice <= getCardsInHand().size()) {
-            if (Game.cardValidation(getCardsInHand().get(choice - 1))) {
-                return getCardsInHand().remove(choice - 1);
-            }
+        Card selectedCard = getCardsInHand().get(choice);
+        if (Game.cardValidation(selectedCard)) {
+            getCardsInHand().remove(choice);
+            return selectedCard;
         }
         return null;
     }

@@ -3,12 +3,11 @@ import java.util.Collections;
 
 public class CardDeck {
     private static ArrayList<Card> cards = new ArrayList<>();
-    private static ArrayList<Card> discardPile;
+    private static ArrayList<Card> discardPile = new ArrayList<>();
 
     public CardDeck() {   //default konstruktor
 //        cards = new ArrayList<>();
         createCards();    //creating carddeck
-        discardPile  = new ArrayList<>();
     }
 
     @Override
@@ -74,31 +73,30 @@ public class CardDeck {
 
 
     public static Card drawCard() {
-
 //        if (cards.isEmpty()) {
-//            //wenn carddeck ist leer
-//            resetDeck();
+//            reshuffleDiscardPile(); // Wenn das Deck leer ist, mische den Ablagestapel zurück ins Deck
 //        }
-        //karten aufheben
-        return cards.remove(cards.size() - 1);
+        return cards.remove(cards.size() - 1); // Entferne und gib die oberste Karte des Decks zurück
     }
 
-    public static void resetDeck() {
-        //discardpile erstellen von discarded cards
-        cards.clear();
-        for (Card discardedCard : discardPile) {
-            cards.add(discardedCard);
+    public static void reshuffleDiscardPile() {
+        if (discardPile.size() > 1) {
+            Card topCard = discardPile.remove(discardPile.size() - 1); // Entferne die oberste Karte vom Ablagestapel
+            Collections.shuffle(discardPile); // Mische den Ablagestapel
+            cards.addAll(discardPile); // Füge die gemischten Karten zum Deck hinzu
+            discardPile.clear(); // Leere den Ablagestapel
+            discardPile.add(topCard); // Lege die zuvor entfernte Karte als erste Karte auf den neuen Ablagestapel
         }
-        discardPile.clear();
-        Collections.shuffle(cards);
     }
 
     public void addToDiscardPile(Card playerDropCard) {
         //gespielte karte zum neue stapel
         cards.add(playerDropCard);
+        //discardPile.add(playerDropCard); // Füge die übergebene Karte dem Ablagestapel hinzu
     }
 
-    public Card getDropCard() {
+    public static Card getDropCard() {
+          //die oberste Karte des Decks zu erhalten, ohne sie vom Deck zu entfernen
         //eine karte ausspielen
         return cards.get(cards.size()-1);
     }

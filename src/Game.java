@@ -19,28 +19,6 @@ public class Game {
 //    private boolean exit = false;
     private static String newColor;
 
-
-    public static String getNewColor() {
-        return newColor;
-    }
-
-    public static String setNewColor(String newColor) {
-        newColor = newColor;
-        return newColor;
-    }
-
-    public static CardDeck getDiscardPile() {
-        return discardPile;
-    }
-
-    public static int getCurrentPlayerNumber() {
-        return currentPlayerNumber;
-    }
-
-    public void setCurrentPlayerNumber(int currentPlayerNumber) {
-        this.currentPlayerNumber = currentPlayerNumber;
-    }
-
     public Game() {
         //konstruktor
         playersInGame = new ArrayList<>();
@@ -119,41 +97,41 @@ public class Game {
                 output.println("\nCard on Table: " + discardPile.getDropCard() + "\n");
             }
             checkNextTurn();
-        } while (gameOver != true);
+        } while (gameOver != true);   //currentPlayer().hasWon();
     }
 
     public void shareCards() {
         //karten austeilen - 7karte
         for (Player p : playersInGame) {
             for (int i = 0; i < 7; i++) {
-                p.giveCard(drawPile.drawCard());  //eine karte von deck zu spieler
+                p.addCardToHand(drawPile.drawCard());  //eine karte von deck zu spieler
             }
         }
     }
 
     public Card layStartCard() {
         //erste karte auf dem tisch, wenn es ist +schwarz, dann wird die farbe random ausgewählt
-        Card card = drawPile.drawCard();
-        discardPile.addToDiscardPile(card);
+        Card firstCard = drawPile.drawCard();
+        discardPile.addToDiscardPile(firstCard);
 
-        if (card.getSign().equals("ColorChange") || card.getSign().equals("+4")) {
+        if (firstCard.getSign().equals("ColorChange") || firstCard.getSign().equals("+4")) {
             // Wenn die erste Karte eine Farbwahlkarte ist, wird die Farbe zufällig ausgewählt
             Random random = new Random();
             String[] colors = {"Red", "Green", "Yellow", "Blue"};
             int randomIndex = random.nextInt(colors.length);
             String startColor = colors[randomIndex];
-            card.setColor(startColor);
-            output.println("First card is: " + card);
+            firstCard.setColor(startColor);
+            output.println("First card is: " + firstCard);
             output.println("First color is: " + startColor);
         } else {
-            output.println("First card is: " + card);
+            output.println("First card is: " + firstCard);
         }
 
-        return card;
+        return firstCard;
     }
 
     public static boolean cardValidation(Card cardOnTheTable) {
-        Card discardDeckCard = getDiscardPile().getDropCard();
+        Card discardDeckCard = getDiscardPile().getDropCard();    //drawCard() ??
         Player currentPlayer = currentPlayer();
 
         if (cardOnTheTable.getColor().equals("Black")) {
@@ -169,7 +147,7 @@ public class Game {
             return true;
         } else {
             output.println("Error... Choose another card!");
-            output.println("Card on Table: " + cardOnTheTable);
+//            output.println("Card on Table: " + cardOnTheTable);
         }
 
         if (discardDeckCard.getSign().equals("+2") || discardDeckCard.getSign().equals("+4")) {
@@ -186,7 +164,7 @@ public class Game {
     public static void penalty() {
         //prüft, wie viel karte muss ein spieler heben
         Player currentPlayer = currentPlayer();
-        Card discardDeckCard = getDiscardPile().getDropCard();
+        Card discardDeckCard = getDiscardPile().getDropCard();  //drawCard() ??
 
         if (discardDeckCard.getSign().equals("+2")) {
             output.println("But first you have to take 2 cards!");
@@ -204,7 +182,7 @@ public class Game {
 
     public void checkNextTurn() {
         //prüft, wer ist die nächste beim reverse, stop und beim normale karte
-        Card discardDeckCard = getDiscardPile().getDropCard();
+        Card discardDeckCard = getDiscardPile().getDropCard();  //drawCard() ???
         if (discardDeckCard.getSign().equals("Reverse")) {
             isCardIsReverse();
             System.out.println("Switch direction ");
@@ -312,12 +290,12 @@ public class Game {
     public static void drawPenaltyCard() {
         //wenn ein spieler bekommt ein +2 oder +4 karte, er muss abheben
         Player currentPlayer = currentPlayer();
-        currentPlayer.giveCard(drawPile.drawCard());
+        currentPlayer.addCardToHand(drawPile.drawCard());
     }
 
     public boolean canPlayerDropACard() {
         //automatisch prüft, kann der spieler eine karte legen, oder muss aufheben
-        Card discardDeckCard = getDiscardPile().getDropCard();
+        Card discardDeckCard = getDiscardPile().getDropCard();  //drawCard() ???
         Player currentPlayer = currentPlayer();
         ArrayList<Card> hand = currentPlayer.getCardsInHand();
         boolean hasCard = false;
@@ -377,6 +355,27 @@ public class Game {
             gameOver = true;
         }
        return winner;
+    }
+
+    public static String getNewColor() {
+        return newColor;
+    }
+
+    public static String setNewColor(String newColor) {
+        newColor = newColor;
+        return newColor;
+    }
+
+    public static CardDeck getDiscardPile() {
+        return discardPile;
+    }
+
+    public static int getCurrentPlayerNumber() {
+        return currentPlayerNumber;
+    }
+
+    public void setCurrentPlayerNumber(int currentPlayerNumber) {
+        this.currentPlayerNumber = currentPlayerNumber;
     }
 
     @Override
