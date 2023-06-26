@@ -10,9 +10,9 @@ public class Game {
     private static CardDeck drawPile;   //ziehstapel
     private static CardDeck discardPile;  //ablegestapel
     private Help help = new Help();
-    private boolean clockweis = true;      //spielrichtung
+    private boolean clockwise = true;      //spielrichtung
     private static int currentPlayerNumber;
-    private String winner;
+    private Player winner;
     private boolean gameOver;
     //    private int round = 1;
 //    private int session = 1;
@@ -57,6 +57,7 @@ public class Game {
         layStartCard();  //erste karte auf dem tisch
         chooseInitialPlayer();
         cardChoice();
+        winner();
 
     }
 
@@ -141,8 +142,7 @@ public class Game {
             String[] colors = {"Red", "Green", "Yellow", "Blue"};
             int randomIndex = random.nextInt(colors.length);
             String startColor = colors[randomIndex];
-            setNewColor(startColor);
-            newColor=card.getColor();
+            card.setColor(startColor);
             output.println("First card is: " + card);
             output.println("First color is: " + startColor);
         } else {
@@ -210,7 +210,7 @@ public class Game {
             System.out.println("Switch direction ");
         } else if (discardDeckCard.getSign().equals("Stop")) {
             isCardStop();
-            System.out.println("You are out " + playersInGame.get(currentPlayerNumber-1).getName());
+            System.out.println("You are out ");
         } else {
             isCardNormal();
         }
@@ -221,19 +221,19 @@ public class Game {
         int currentPlayerIndex = getCurrentPlayerNumber();
 
         if (currentPlayerIndex == 0) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex++;
             } else {
                 currentPlayerIndex = 3;
             }
         } else if (currentPlayerIndex == 3) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex = 0;
             } else {
                 currentPlayerIndex = 2;
             }
         } else {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex++;
             } else {
                 currentPlayerIndex--;
@@ -248,28 +248,28 @@ public class Game {
         int currentPlayerIndex = getCurrentPlayerNumber();
 
         if (currentPlayerIndex == 0) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex = 3;
-                clockweis = false;
+                clockwise = false;
             } else {
                 currentPlayerIndex = 1;
-                clockweis = true;
+                clockwise = true;
             }
         } else if (currentPlayerIndex == 3) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex = 2;
-                clockweis = false;
+                clockwise = false;
             } else {
                 currentPlayerIndex = 0;
-                clockweis = true;
+                clockwise = true;
             }
         } else {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex--;
-                clockweis = false;
+                clockwise = false;
             } else {
                 currentPlayerIndex++;
-                clockweis = true;
+                clockwise = true;
             }
         }
         setCurrentPlayerNumber(currentPlayerIndex);
@@ -281,25 +281,25 @@ public class Game {
         int currentPlayerIndex = getCurrentPlayerNumber();
 
         if (currentPlayerIndex == 0) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex = 2;
             } else {
                 currentPlayerIndex = 2;
             }
         } else if (currentPlayerIndex == 3) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex = 1;
             } else {
                 currentPlayerIndex = 1;
             }
         } else if (currentPlayerIndex == 1) {
-            if (clockweis) {
+            if (clockwise) {
                 currentPlayerIndex = 3;
             } else {
                 currentPlayerIndex = 3;
             }
-        } else {
-            if (clockweis) {
+        } else if (currentPlayerIndex == 2) {
+            if (clockwise) {
                 currentPlayerIndex = 0;
             } else {
                 currentPlayerIndex = 0;
@@ -371,14 +371,12 @@ public class Game {
         } while (true);
     }
 
-    public boolean winner() {
-        for (Player p : playersInGame) {
-            if (p.getCardsInHand().size() == 0) {
-                winner = p.getName();
-                gameOver = true;
-            }
+    public Player winner() {
+        if (currentPlayer().getCardsInHand().size() == 0) {
+            winner = currentPlayer();
+            gameOver = true;
         }
-        return false;
+       return winner;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class CardDeck {
             cards.add(new Card("+2", "Blue", 20));
             cards.add(new Card("Stop", "Blue", 20));
             for (int j = 1; j < 10; j++) {  //zahlen
-                cards.add(new Card(Integer.toString(j), "Blue", i));
+                cards.add(new Card(Integer.toString(j), "Blue", j));
             }
         }
 
@@ -34,7 +34,7 @@ public class CardDeck {
             cards.add(new Card("+2", "Green", 20));
             cards.add(new Card("Stop", "Green", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Green", i));
+                cards.add(new Card(Integer.toString(j), "Green", j));
             }
         }
         for (int i = 0; i < 2; i++) {
@@ -43,7 +43,7 @@ public class CardDeck {
             cards.add(new Card("+2", "Red", 20));
             cards.add(new Card("Stop", "Red", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Red", i));
+                cards.add(new Card(Integer.toString(j), "Red", j));
             }
         }
 
@@ -53,7 +53,7 @@ public class CardDeck {
             cards.add(new Card("+2", "Yellow", 20));
             cards.add(new Card("Stop", "Yellow", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Yellow" , i));
+                cards.add(new Card(Integer.toString(j), "Yellow" , j));
             }
         }
         for (int b = 0; b < 1; b++) {
