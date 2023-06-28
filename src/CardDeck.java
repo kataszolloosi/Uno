@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardDeck {
-    private static ArrayList<Card> cards = new ArrayList<>();
+    private static ArrayList<Card> cards;
+    private static ArrayList<Card> discardPile = new ArrayList<>();
 
 
     public CardDeck() {   //default konstruktor
+        cards = new ArrayList<>();
         createCards();    //creating carddeck
     }
 
@@ -51,7 +53,7 @@ public class CardDeck {
             cards.add(new Card("+2", "Yellow", 20));
             cards.add(new Card("Stop", "Yellow", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Yellow" , j));
+                cards.add(new Card(Integer.toString(j), "Yellow", j));
             }
         }
         for (int b = 0; b < 1; b++) {
@@ -72,16 +74,25 @@ public class CardDeck {
 
 
     public static Card drawCard() {
-        return cards.remove(cards.size()-1);
+
+        if (cards.isEmpty()) {
+            //wenn carddeck ist leer
+            resetDeck();
+        }
+        //karten aufheben
+        return cards.remove(cards.size() - 1);
     }
 
-    public boolean isEmpty(){
-        //prüfung, ob der Kartenstapel leer ist
-        if(cards.size() == 0){
-            return true;
+    public static void resetDeck() {
+        //discardpile erstellen von discarded cards
+        cards.clear();
+        for (Card discardedCard : discardPile) {
+            cards.add(discardedCard);
         }
-        return false;
+        discardPile.clear();
+        Collections.shuffle(cards);
     }
+
 
     public void addToDiscardPile(Card playerDropCard) {
         //gespielte karte zum neue stapel
@@ -90,6 +101,6 @@ public class CardDeck {
 
     public Card getDropCard() {
         //eine karte ausspielen
-        return cards.get(cards.size()-1);
+        return cards.get(cards.size() - 1);
     }
 }

@@ -129,21 +129,28 @@ public class Game {
         //karten austeilen - 7karte
         for (Player p : playersInGame) {
             for (int i = 0; i < 7; i++) {
-                p.giveCard(drawPile.drawCard());//eine karte von deck zu spieler
+                p.addCardToHand(drawPile.drawCard());//eine karte von deck zu spieler
 
             }
         }
     }
 
     public Card layStartCard() {
-        //erste karte auf dem tisch, wenn es ist eine schwarze karte, zieht ein neue
-        Card card = drawPile.drawCard();
-        discardPile.addToDiscardPile(card);
+        //erste karte auf dem tisch, wenn es ist +4, dann wird die farbe random ausgewählt
+        Card card = getDiscardPile().getDropCard();
 
         if (card.getSign().equals("ColorChange") || card.getSign().equals("+4")) {
-            output.println("First card is: " + card + " invalid");
+            // Wenn die erste Karte eine Farbwahlkarte ist, wird die Farbe zufällig ausgewählt
+            Random random = new Random();
+            String[] colors = {"Red", "Green", "Yellow", "Blue"};
+            int randomIndex = random.nextInt(colors.length);
+            String startColor = colors[randomIndex];
+            setNewColor(startColor);
+            newColor=card.getColor();
+            output.println("First card is: " + card);
+            output.println("First color is: " + startColor);
         } else {
-            drawPile.drawCard();
+
             output.println("First card is: " + card);
         }
 
@@ -314,7 +321,7 @@ public class Game {
     public static void drawPenaltyCard() {
         //wenn ein spieler bekommt ein +2 oder +4 karte, er muss abheben
         Player currentPlayer = currentPlayer();
-        currentPlayer.giveCard(drawPile.drawCard());
+        currentPlayer.addCardToHand(drawPile.drawCard());
     }
 
     public boolean canPlayerDropACard() {
