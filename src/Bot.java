@@ -12,7 +12,7 @@ public class Bot extends Player {
         Card selectedCard = CardDeck.drawCard();
 
         if (choice > 0 && choice <= getCardsInHand().size()) {
-            if (Game.cardValidation(getCardsInHand().get(choice - 1))) {
+            if (Game.cardValidation(selectedCard)) {
                 return getCardsInHand().remove(choice - 1);
             }
         }

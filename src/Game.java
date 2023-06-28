@@ -50,7 +50,7 @@ public class Game {
 
 
     public void start() {
-        help.printHelp();  //help am anfang anzeigen
+        //help.printHelp();  //help am anfang anzeigen
         addPlayers();
 
         shareCards();   //karten austeilen
@@ -104,10 +104,13 @@ public class Game {
     }
 
     public void cardChoice() {
+
         //prüft ob der player kann eine karte legen und welche, wenn er kann nicht, zieht eine karte
         do {
             Player currentPlayer = currentPlayer();
             output.println("\nPlayer " + currentPlayer.getName() + " your turn");
+            System.out.println("0 - Help");
+
             penalty();
             if (canPlayerDropACard()) {
                 output.println("Your cards: " + "\n" + currentPlayer.showMyCards());
@@ -126,26 +129,21 @@ public class Game {
         //karten austeilen - 7karte
         for (Player p : playersInGame) {
             for (int i = 0; i < 7; i++) {
-                p.giveCard(drawPile.drawCard());  //eine karte von deck zu spieler
+                p.giveCard(drawPile.drawCard());//eine karte von deck zu spieler
+
             }
         }
     }
 
     public Card layStartCard() {
-        //erste karte auf dem tisch, wenn es ist +schwarz, dann wird die farbe random ausgewählt
+        //erste karte auf dem tisch, wenn es ist eine schwarze karte, zieht ein neue
         Card card = drawPile.drawCard();
         discardPile.addToDiscardPile(card);
 
         if (card.getSign().equals("ColorChange") || card.getSign().equals("+4")) {
-            // Wenn die erste Karte eine Farbwahlkarte ist, wird die Farbe zufällig ausgewählt
-            Random random = new Random();
-            String[] colors = {"Red", "Green", "Yellow", "Blue"};
-            int randomIndex = random.nextInt(colors.length);
-            String startColor = colors[randomIndex];
-            card.setColor(startColor);
-            output.println("First card is: " + card);
-            output.println("First color is: " + startColor);
+            output.println("First card is: " + card + " invalid");
         } else {
+            drawPile.drawCard();
             output.println("First card is: " + card);
         }
 
@@ -169,7 +167,7 @@ public class Game {
             return true;
         } else {
             output.println("Error... Choose another card!");
-            output.println("Card on Table: " + cardOnTheTable);
+            output.println("Card on Table: " + discardDeckCard);
         }
 
         if (discardDeckCard.getSign().equals("+2") || discardDeckCard.getSign().equals("+4")) {
@@ -301,6 +299,10 @@ public class Game {
         } else if (currentPlayerIndex == 2) {
             if (clockwise) {
                 currentPlayerIndex = 0;
+            }
+        } else {
+            if (clockwise) {
+                currentPlayerIndex = 0;
             } else {
                 currentPlayerIndex = 0;
             }
@@ -376,7 +378,7 @@ public class Game {
             winner = currentPlayer();
             gameOver = true;
         }
-       return winner;
+        return winner;
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     protected String name;
-    protected int playersNumber = 4;
+    protected int playersNumber;
     private final ArrayList<Card> cardsInHand = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
     private String winner;
@@ -41,12 +41,16 @@ public class Player {
                 System.out.println("Error!...  Please enter a NUMBER between 1 and " + cardsInHand.size());
                 continue;
             }
-            if (choice > 0 && choice <= cardsInHand.size()) {
+            if (choice >= 0 && choice <= cardsInHand.size()) {
+                if (choice == 0) {
+                    Help.printHelp();
+                    continue;
+                }
                 if (Game.cardValidation(cardsInHand.get(choice - 1))) {
                     return cardsInHand.remove(choice - 1);
                 }
             } else {
-                System.out.println("Error... Please enter a NUMBER between 1 and " + cardsInHand.size() + " eingeben:");
+                System.out.println("Error... Please enter a NUMBER between 0 and " + cardsInHand.size() + " eingeben:");
             }
         }
         while (true);

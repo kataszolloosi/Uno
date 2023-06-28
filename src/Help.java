@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Help {
-    public void printHelp() {
+    public static void printHelp() {
         File file = new File("help.txt");
         BufferedReader bufferedReader = null;
 
