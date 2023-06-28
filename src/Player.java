@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
@@ -7,28 +6,21 @@ public class Player {
     protected String name;
     protected int playersNumber;
     private final ArrayList<Card> cardsInHand = new ArrayList<>();
-    private ArrayList<Player> players = new ArrayList<>();
-    private String winner;
-    private boolean gameOver;
 
 
     public Player(String name, int playersNumber) {
         this.name = name;
         this.playersNumber = playersNumber;
-        gameOver = false;
     }
 
-    public ArrayList<Card> getCardsInHand() {
-        return cardsInHand;
-    }
-
-    public void giveCard(Card card) {
-        //karte zu hand - heben
+    public void addCardToHand(Card card) {
+        //zieht eine Karte vom Kartenstapel (CardDeck) und fügt sie der Hand des Spielers hinzu
         cardsInHand.add(card);
     }
 
     public Card playerDropCard() {
-        //karte auf dem tisch legen
+        //entfernt eine Karte aus der Hand des Spielers anhand des Indexes und gibt sie zurück
+        // Dadurch kann der Spieler eine Karte spielen
 
         int choice;   //kann wählen welche karte(wievielte) vom reihe(1-7)
 
@@ -56,15 +48,6 @@ public class Player {
         while (true);
     }
 
-    public void takeCardBack(Card card) {
-        cardsInHand.add(card);
-    }
-
-    public int countMyCards() {
-        //wie viel karte hat ein spieler
-        return cardsInHand.size();
-    }
-
     public String showMyCards() {
         //welche karten hat der spieler
         String myCards = "";
@@ -76,18 +59,23 @@ public class Player {
         return myCards;
     }
 
+    public boolean hasWon() {
+        return cardsInHand.isEmpty();
+    }
+
+    //getter-setter methode
+    public ArrayList<Card> getCardsInHand() {
+        return cardsInHand;
+    }
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public int getPlayersNumber() {
         return playersNumber;
     }
-
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
     }
