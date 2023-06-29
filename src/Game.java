@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -45,13 +46,23 @@ public class Game {
         //konstruktor
         playersInGame = new ArrayList<>();
         drawPile = new CardDeck();
+        drawPile.createCards();
+        System.out.println("größe von drawpile: " + drawPile.getNumberOfCards());
         discardPile = new CardDeck();
+        System.out.println("größe von discardpile: " + discardPile.getNumberOfCards());
     }
 
 
     public void start() {
         //help.printHelp();  //help am anfang anzeigen
+
+        drawPile.createCards();
+        System.out.println("Discardpile: ");
+        discardPile.showAllCards();
+        drawPile.shuffle();
+//        drawPile.showAllCards();
         addPlayers();
+
 
         shareCards();   //karten austeilen
         layStartCard();  //erste karte auf dem tisch
@@ -115,7 +126,7 @@ public class Game {
             if (canPlayerDropACard()) {
                 output.println("Your cards: " + "\n" + currentPlayer.showMyCards());
                 output.println("Which card do you want to play?");
-                discardPile.addToDiscardPile(currentPlayer.playerDropCard());
+                discardPile.addToPile(currentPlayer.playerDropCard());
                 output.println("Card on Table: " + discardPile.getDropCard());
             } else {
                 output.println("Yout still don't have a card to play");
@@ -129,11 +140,14 @@ public class Game {
         //karten austeilen - 7karte
         for (Player p : playersInGame) {
             for (int i = 0; i < 7; i++) {
+                System.out.println("karten in drawpile: " + drawPile.getNumberOfCards());
                 p.addCardToHand(drawPile.drawCard());//eine karte von deck zu spieler
 
             }
         }
     }
+
+    //eigene funktion wo kann ich neu mischen
 
     public Card layStartCard() {
         //erste karte auf dem tisch, wenn es ist +4, dann wird die farbe random ausgewählt
@@ -146,7 +160,7 @@ public class Game {
             int randomIndex = random.nextInt(colors.length);
             String startColor = colors[randomIndex];
             setNewColor(startColor);
-            newColor=card.getColor();
+            newColor = card.getColor();
             output.println("First card is: " + card);
             output.println("First color is: " + startColor);
         } else {
@@ -157,34 +171,29 @@ public class Game {
         return card;
     }
 
-    public static boolean cardValidation(Card cardOnTheTable) {
-        Card discardDeckCard = getDiscardPile().getDropCard();
+    public static boolean cardValidation(Card discardedCard) {
+        Card cardOnTheTable = getDiscardPile().getDropCard();
         Player currentPlayer = currentPlayer();
 
-        if (cardOnTheTable.getColor().equals("Black")) {
-            if (cardOnTheTable.getSign().equals("+4") || cardOnTheTable.getSign().equals("ColorChange")) {
-                setColorIfColorChangeCard(cardOnTheTable);
+        if (discardedCard.getColor().equals("Black")) {
+            if (discardedCard.getSign().equals("+4") || discardedCard.getSign().equals("ColorChange")) {
+                setColorIfColorChangeCard(discardedCard);
+                output.println("new color: " + newColor);
                 return true;
             }
-        } else if (cardOnTheTable.getColor().equals(newColor)) {
+        } else if (discardedCard.getColor().equals(newColor)) {
             return true;
-        } else if (cardOnTheTable.getColor().equals(discardDeckCard.getColor())) {
+        } else if (discardedCard.getColor().equals(cardOnTheTable.getColor())) {
             return true;
-        } else if (cardOnTheTable.getSign().equals(discardDeckCard.getSign())) {
+        } else if (discardedCard.getSign().equals(cardOnTheTable.getSign())) {
             return true;
         } else {
             output.println("Error... Choose another card!");
-            output.println("Card on Table: " + discardDeckCard);
+            output.println("Card on Table: " + cardOnTheTable);
+            System.out.println("discardpile");
+            discardPile.showAllCards();
         }
-
-        if (discardDeckCard.getSign().equals("+2") || discardDeckCard.getSign().equals("+4")) {
-            if (discardDeckCard.getSign().equals("+2")) {
-                penalty();
-            } else if (discardDeckCard.getSign().equals("+4")) {
-                penalty();
-            }
-        }
-
+        penalty();
         return false;
     }
 
@@ -215,7 +224,7 @@ public class Game {
             System.out.println("Switch direction ");
         } else if (discardDeckCard.getSign().equals("Stop")) {
             isCardStop();
-            System.out.println("You are out ");
+            System.out.println("You are out " + playersInGame.get(currentPlayerNumber - 1).getName());
         } else {
             isCardNormal();
         }
@@ -361,18 +370,22 @@ public class Game {
             if (colorWish.equalsIgnoreCase("Red")) {
                 System.out.println("You wish for Red");
                 cardOnTheTable.setColor("Red");
+                newColor= "Red";
                 return;
             } else if (colorWish.equalsIgnoreCase("Blue")) {
                 System.out.println("You wish for Blue");
                 cardOnTheTable.setColor("Blue");
+                newColor= "Blue";
                 return;
             } else if (colorWish.equalsIgnoreCase("Green")) {
                 System.out.println("You wish for Green");
                 cardOnTheTable.setColor("Green");
+                newColor= "Green";
                 return;
             } else if (colorWish.equalsIgnoreCase("Yellow")) {
                 System.out.println("You wish for Yellow");
                 cardOnTheTable.setColor("Yellow");
+                newColor= "Yellow";
                 return;
             } else {
                 System.out.println("This color is not valid!");
@@ -387,6 +400,16 @@ public class Game {
         }
         return winner;
     }
+
+//    public static void resetDrawPile() {
+//        //discardpile erstellen von discarded cards
+//        drawPile.clear();
+//        for (Card discardedCard : discardPile) {
+//            discardPile.addToPile(discardedCard);
+//        }
+//        discardPile.clear();
+//        discardPile.shuffle();
+//    }
 
     @Override
     public String toString() {

@@ -3,12 +3,12 @@ import java.util.Collections;
 
 public class CardDeck {
     private static ArrayList<Card> cards;
-    private static ArrayList<Card> discardPile = new ArrayList<>();
+//    private static ArrayList<Card> discardPile = new ArrayList<>();
 
 
     public CardDeck() {   //default konstruktor
         cards = new ArrayList<>();
-        createCards();    //creating carddeck
+//        createCards();    //creating carddeck
     }
 
     @Override
@@ -69,38 +69,52 @@ public class CardDeck {
             cards.add(new Card("+4", "Black", 50));
             cards.add(new Card("ColorChange", "Black", 50));
         }
+
+    }
+
+    public int getNumberOfCards() {
+        return cards.size();
+    }
+
+    public void shuffle() {
         Collections.shuffle(cards);
     }
 
+    public void showAllCards() {
+        for (Card card: cards) {
+            System.out.println(card.toString());
+        }
+    }
 
     public static Card drawCard() {
 
         if (cards.isEmpty()) {
             //wenn carddeck ist leer
-            resetDeck();
+            //TODO: resetcarddeck
+            return null;
         }
         //karten aufheben
-        return cards.remove(cards.size() - 1);
-    }
-
-    public static void resetDeck() {
-        //discardpile erstellen von discarded cards
-        cards.clear();
-        for (Card discardedCard : discardPile) {
-            cards.add(discardedCard);
-        }
-        discardPile.clear();
-        Collections.shuffle(cards);
+//        System.out.println("Hallo von drawCard: es gibt " + cards.size() + " Karten in dem Deck VOR dem Heben.");
+        Card tmp_card =  cards.remove(cards.size() - 1);
+//        System.out.println("Hallo von drawCard: es gibt " + cards.size() + " Karten in dem Deck NACH dem Heben.");
+        return tmp_card;
     }
 
 
-    public void addToDiscardPile(Card playerDropCard) {
+
+
+    public void addToPile(Card playerDropCard) {
         //gespielte karte zum neue stapel
+//        System.out.println("Hallo von addtodiscardpile: es gibt " + discardPile.size() + " Karten in dem Deck VOR dem Heben.");
         cards.add(playerDropCard);
     }
 
     public Card getDropCard() {
         //eine karte ausspielen
         return cards.get(cards.size() - 1);
+    }
+
+    public void clear() {
+
     }
 }

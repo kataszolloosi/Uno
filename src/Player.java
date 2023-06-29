@@ -39,6 +39,7 @@ public class Player {
                     continue;
                 }
                 if (Game.cardValidation(cardsInHand.get(choice - 1))) {
+
                     return cardsInHand.remove(choice - 1);
                 }
             } else {
