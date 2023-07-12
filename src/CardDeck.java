@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardDeck {
-    private static ArrayList<Card> cards = new ArrayList<>();
-    private static ArrayList<Card> discardPile = new ArrayList<>();
+    private  ArrayList<Card> cards;
+//    private static ArrayList<Card> discardPile = new ArrayList<>();
 
     public CardDeck() {   //default konstruktor
-//        cards = new ArrayList<>();
-        createCards();    //creating carddeck
+        cards = new ArrayList<>();
+//        createCards();    //creating carddeck
     }
 
     @Override
@@ -68,37 +68,51 @@ public class CardDeck {
             cards.add(new Card("+4", "Black", 50));
             cards.add(new Card("ColorChange", "Black", 50));
         }
+//        Collections.shuffle(cards);
+    }
+
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public int getNumberOfCards() {
+        return cards.size();
+    }
+
+    public void shuffle() {
         Collections.shuffle(cards);
     }
 
-
-    public static Card drawCard() {
-//        if (cards.isEmpty()) {
-//            reshuffleDiscardPile(); // Wenn das Deck leer ist, mische den Ablagestapel zurück ins Deck
-//        }
-        return cards.remove(cards.size() - 1); // Entferne und gib die oberste Karte des Decks zurück
-    }
-
-    public static void reshuffleDiscardPile() {
-        if (discardPile.size() > 1) {
-            Card topCard = discardPile.remove(discardPile.size() - 1); // Entferne die oberste Karte vom Ablagestapel
-            Collections.shuffle(discardPile); // Mische den Ablagestapel
-            cards.addAll(discardPile); // Füge die gemischten Karten zum Deck hinzu
-            discardPile.clear(); // Leere den Ablagestapel
-            discardPile.add(topCard); // Lege die zuvor entfernte Karte als erste Karte auf den neuen Ablagestapel
+    public void showAllCards() {
+        for (Card card: cards) {
+            System.out.println(card.toString());
         }
     }
 
-    public void addToDiscardPile(Card playerDropCard) {
-        //gespielte karte zum neue stapel
-        cards.add(playerDropCard);
-        //discardPile.add(playerDropCard); // Füge die übergebene Karte dem Ablagestapel hinzu
+    public Card drawCard() {
+
+        if (cards.isEmpty()) {
+            //wenn carddeck ist leer
+            //TODO: resetcarddeck
+            return null;
+        }
+        //karten aufheben
+//        System.out.println("Hallo von drawCard: es gibt " + cards.size() + " Karten in dem Deck VOR dem Heben.");
+        Card tmp_card =  cards.remove(cards.size() - 1);
+//        System.out.println("Hallo von drawCard: es gibt " + cards.size() + " Karten in dem Deck NACH dem Heben.");
+        return tmp_card;
     }
 
-    public static Card getDropCard() {
-          //die oberste Karte des Decks zu erhalten, ohne sie vom Deck zu entfernen
-        //eine karte ausspielen
-        return cards.get(cards.size()-1);
+    public void addToPile(Card playerDropCard) {
+        //gespielte karte zum neue stapel
+//        System.out.println("Hallo von addtodiscardpile: es gibt " + discardPile.size() + " Karten in dem Deck VOR dem Heben.");
+        cards.add(0,playerDropCard);
+    }
+
+    public Card getTopCard(CardDeck deck) {
+        Card topCard = deck.getCards().get(0);
+        return topCard;
     }
 
 

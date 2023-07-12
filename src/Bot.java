@@ -5,21 +5,17 @@ public class Bot extends Player {
         super(name, playersNumber);
     }
 
-
     @Override
-    public void addCardToHand(Card card) {
-        super.addCardToHand(card);
+    public void giveCard(Card card) {
+        //karte zu hand - heben
+        getCardsInHand().add(card);
     }
-
     @Override
     public Card playerDropCard() {
-        Random random = new Random();
-        int choice = random.nextInt(getCardsInHand().size());
-        Card selectedCard = getCardsInHand().get(choice);
-        if (Game.cardValidation(selectedCard)) {
-            getCardsInHand().remove(choice);
-            return selectedCard;
-        }
+
+        //menjen vegeig az osszes kartyan index szammal, hogy le tudja e rakni, ha nem, akkor huz egyet
+       //for () //ha a forban error(try) jon vissza, ellenorzi a kovetkezo lapjat
+           //ha jo a lap, vissza kell adnia es ne menjen tovabb
         return null;
     }
 }
