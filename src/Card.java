@@ -9,6 +9,7 @@ public class Card {
         this.sign = sign;
         this.color = color;
         this.value = value;
+
     }
 
     public String getSign() {
