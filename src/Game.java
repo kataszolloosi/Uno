@@ -23,7 +23,7 @@ public class Game {
 
     private static CardDeck discardPile;  //ablegestapel
     private Help help = new Help();
-    private boolean clockweis = true;      //spielrichtung
+    private static boolean clockweis = true;      //spielrichtung
     private static int currentPlayerNumber;
     private String winner;
     private boolean gameOver;
@@ -59,8 +59,8 @@ public class Game {
         return currentPlayerNumber;
     }
 
-    public void setCurrentPlayerNumber(int currentPlayerNumber) {
-        this.currentPlayerNumber = currentPlayerNumber;
+    public static void setCurrentPlayerNumber(int currentPlayerNumber) {
+        Game.currentPlayerNumber = currentPlayerNumber;
     }
 
     public Game() {
@@ -228,7 +228,7 @@ public class Game {
         }
     }
 
-    public void checkNextTurn() {
+    public static void checkNextTurn() {
         Player currentPlayer = currentPlayer();
         //prüft, wer ist die nächste beim reverse, stop und beim normale karte
         Card discardDeckCard = getDiscardPile().getTopCard(discardPile);
@@ -243,7 +243,7 @@ public class Game {
         }
     }
 
-    public int isCardNormal() {
+    public static int isCardNormal() {
         //prüft, ob die karte ist eine normale karte
         int currentPlayerIndex = getCurrentPlayerNumber();
 
@@ -270,7 +270,7 @@ public class Game {
         return currentPlayerIndex;
     }
 
-    public int isCardIsReverse() {
+    public static int isCardIsReverse() {
         //beim reverse karte prüft wer ist die nächste spieler
         int currentPlayerIndex = getCurrentPlayerNumber();
 
@@ -303,7 +303,7 @@ public class Game {
         return currentPlayerIndex;
     }
 
-    public int isCardStop() {
+    public static int isCardStop() {
         //spielrichtung
         int currentPlayerIndex = getCurrentPlayerNumber();
 
@@ -341,7 +341,7 @@ public class Game {
     }
 
 
-    public boolean canPlayerDropACard() {
+    public static boolean canPlayerDropACard() {
         //automatisch prüft, kann der spieler eine karte legen, oder muss aufheben
         Card discardDeckCard = getDiscardPile().getTopCard(discardPile);
         Player currentPlayer = currentPlayer();

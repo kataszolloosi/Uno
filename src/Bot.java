@@ -1,21 +1,23 @@
-import java.util.Random;
-
 public class Bot extends Player {
     public Bot(String name, int playersNumber) {
         super(name, playersNumber);
     }
 
-    @Override
-    public void giveCard(Card card) {
-        //karte zu hand - heben
-        getCardsInHand().add(card);
-    }
-    @Override
-    public Card playerDropCard() {
+    public void botCardChoice() {
+        Player currentPlayer = Game.currentPlayer();
 
-        //menjen vegeig az osszes kartyan index szammal, hogy le tudja e rakni, ha nem, akkor huz egyet
-       //for () //ha a forban error(try) jon vissza, ellenorzi a kovetkezo lapjat
-           //ha jo a lap, vissza kell adnia es ne menjen tovabb
-        return null;
+        System.out.println("\nPlayer " + currentPlayer.getName() + " your turn");
+        Game.penalty();
+        if (Game.canPlayerDropACard()) {
+            System.out.println("Your cards: " + "\n" + currentPlayer.showMyCards());
+            System.out.println("Which card do you want to play?");
+            //playerDropCard()-> Spiel choice mit Scanner
+            Game.getDiscardPile().addToPile(currentPlayer.playerDropCard());
+            System.out.println("Card on Table: " + Game.getDiscardPile().getTopCard(Game.getDiscardPile()));
+        } else {
+            System.out.println("Yout still don't have a card to play");
+            System.out.println("\nCard on Table: " + Game.getDiscardPile().getTopCard(Game.getDiscardPile()) + "\n");
+        }
+        Game.checkNextTurn();
     }
 }
