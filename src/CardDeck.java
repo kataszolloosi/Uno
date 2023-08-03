@@ -2,17 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardDeck {
-    private  ArrayList<Card> cards;
-//    private static ArrayList<Card> discardPile = new ArrayList<>();
+    private ArrayList<Card> cards;
 
     public CardDeck() {   //default konstruktor
-        cards = new ArrayList<>();
-//        createCards();    //creating carddeck
-    }
-
-    @Override
-    public String toString() {
-        return "CardDeck" + cards;
+        this.cards = new ArrayList<>();
     }
 
     //carddeck erstellen mit alle aktionskarten
@@ -52,7 +45,7 @@ public class CardDeck {
             cards.add(new Card("+2", "Yellow", 20));
             cards.add(new Card("Stop", "Yellow", 20));
             for (int j = 1; j < 10; j++) {
-                cards.add(new Card(Integer.toString(j), "Yellow" , j));
+                cards.add(new Card(Integer.toString(j), "Yellow", j));
             }
         }
         for (int b = 0; b < 1; b++) {
@@ -68,16 +61,11 @@ public class CardDeck {
             cards.add(new Card("+4", "Black", 50));
             cards.add(new Card("ColorChange", "Black", 50));
         }
-//        Collections.shuffle(cards);
+       // Collections.shuffle(cards);
     }
-
 
     public ArrayList<Card> getCards() {
         return cards;
-    }
-
-    public int getNumberOfCards() {
-        return cards.size();
     }
 
     public void shuffle() {
@@ -98,15 +86,12 @@ public class CardDeck {
             return null;
         }
         //karten aufheben
-//        System.out.println("Hallo von drawCard: es gibt " + cards.size() + " Karten in dem Deck VOR dem Heben.");
         Card tmp_card =  cards.remove(cards.size() - 1);
-//        System.out.println("Hallo von drawCard: es gibt " + cards.size() + " Karten in dem Deck NACH dem Heben.");
         return tmp_card;
     }
 
+
     public void addToPile(Card playerDropCard) {
-        //gespielte karte zum neue stapel
-//        System.out.println("Hallo von addtodiscardpile: es gibt " + discardPile.size() + " Karten in dem Deck VOR dem Heben.");
         cards.add(0,playerDropCard);
     }
 
@@ -115,5 +100,14 @@ public class CardDeck {
         return topCard;
     }
 
+    @Override
+    public String toString() {
+        return "CardDeck{" +
+                "cards=" + cards
+                ;
+    }
 
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
 }

@@ -1,8 +1,13 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Help {
-    public static void printHelp() {
-        File file = new File("help.txt");
+    public void printHelp() {
+
+        //Richtige Pathname muss gegeben werden
+        File file = new File("C:\\Users\\S53029\\Desktop\\UNOFertig\\src\\help.txt");
         BufferedReader bufferedReader = null;
 
         try {
@@ -16,11 +21,12 @@ public class Help {
         } catch (IOException e) {
             System.out.println("Error...");
         } finally {
-            try {
-                assert bufferedReader != null;
-                bufferedReader.close();
-            } catch(IOException e) {
-                e.printStackTrace();
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
